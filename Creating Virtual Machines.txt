@@ -1,0 +1,49 @@
+
+Create a utility virtual machine
+
+
+    gcloud compute instances create fisseha1 --region=us-central1 --zone=us-central1-c --machine-type=n1-standard-1 --no-address 
+
+
+Explore the VM details
+
+
+    gcloud compute instances describe fisseha1 --zone=us-central1-c
+
+
+Create a Windows virtual machine
+
+
+    gcloud compute instances create fissehavm2 --zone=europe-west2-b --machine-type=n1-standard-2 --image=windows-server-2016-dc-core-v20200908 --image-project=windows-cloud --boot-disk-size=100GB --boot-disk-type=pd-ssd
+
+    gcloud compute firewall-rules create default-allow-http --direction=INGRESS --action=ALLOW --rules=tcp:80 --target-tags=http-server
+
+    gcloud compute firewall-rules create default-allow-https --direction=INGRESS --action=ALLOW --rules=tcp:443 --target-tags=https-server
+
+
+Set the password for the VM
+
+
+    gcloud compute reset-windows-password fissehavm2 --zone=us-central1-c
+
+
+Create a custom virtual machine
+
+
+    gcloud compute instances create fissehavm3 --zone=us-west1-b --machine-type=custom-6-32768 
+
+
+Connect via SSH to your custom VM
+
+  
+    gcloud compute ssh fissehavm3
+    #To see information about unused and used memory
+    free
+    #To see details about the RAM installed on your VM
+    sudo dmidecode -t 17
+    #To verify the number of processors
+    nproc
+    #To see details about the CPUs installed on your VM
+    lscpu
+    #To exit the SSH terminal
+    exit
